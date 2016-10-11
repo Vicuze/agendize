@@ -10,7 +10,10 @@
 		<module>..\agendize-api</module>
 		<module>..\agendize-calls-api</module>
 		<module>..\agendize-clients-api</module>
-		<module>..\agendize-platform-api</module>
+		<module>..\agendize-emails-api</module>
+		<module>..\agendize-forms-api</module>
+		<module>..\agendize-account-api</module>
+		<module>..\agendize-queues-api</module>
 		<module>..\agendize-resellers-api</module>
 		<module>..\agendize-scheduling-api</module>
 	</modules>

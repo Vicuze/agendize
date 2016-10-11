@@ -28,7 +28,7 @@ public class ServicesManager extends AgendizeApiManager{
 	static final Logger logger = LogManager.getLogger(ServicesManager.class);
 
 	/**
-	 * @param apiKey API Key. No API Key? <a target="_blank" href="http://www.agendize.com/account#app" >Get one here</a>
+	 * @param apiKey API Key. No API Key? <a target="_blank" href="http://app.agendize.com/account#app" >Get one here</a>
 	 * @param token SSO token. See <a target="_blank" href="http://developers.agendize.com/en/p/authentication" >http://developers.agendize.com/en/p/authentication</a>
 	 * @throws IOException in case the API key or SSO token are not valid
 	 */
@@ -146,7 +146,7 @@ public class ServicesManager extends AgendizeApiManager{
 	}
 	
 	/**
-	 * Creates a service
+	 * Creates a service.
 	 * @param companyId Company identifier.
 	 * @param service Service to create. The name of the service is mandatory, the rest is optional.
 	 * @return the created service with its id.
@@ -173,7 +173,7 @@ public class ServicesManager extends AgendizeApiManager{
 	}
 	
 	/**
-	 * Creates a service
+	 * Creates a service. (1 less api call because there is no check for the company. will return an exception if there is no company.)
 	 * @param companyId Company identifier.
 	 * @param service Service to create. The name of the service is mandatory, the rest is optional.
 	 * @return the created service with its id.

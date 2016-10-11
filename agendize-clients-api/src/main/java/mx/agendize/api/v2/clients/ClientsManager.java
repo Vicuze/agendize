@@ -32,7 +32,7 @@ public class ClientsManager extends AgendizeApiManager {
 	static final Logger logger = LogManager.getLogger(ClientsManager.class);
 
 	/**
-	 * @param apiKey API Key. No API Key? <a target="_blank" href="http://www.agendize.com/account#app" >Get one here</a>
+	 * @param apiKey API Key. No API Key? <a target="_blank" href="http://app.agendize.com/account#app" >Get one here</a>
 	 * @param token SSO token. See <a target="_blank" href="http://developers.agendize.com/en/p/authentication" >http://developers.agendize.com/en/p/authentication</a>
 	 * @throws IOException in case the API key or SSO token are not valid
 	 */
@@ -170,7 +170,7 @@ public class ClientsManager extends AgendizeApiManager {
 	 * Returns activities of a specific client based on its ID
 	 * @param clientId Client identifier. Required.
 	 * @param startDate Upper bound (exclusive) for an appointment's start time (as a RFC 3339 timestamp) to filter by. Optional. The default is not to filter by start time.
-	 * @param endDateLower bound (exclusive) for an appointment's end time (as a RFC 3339 timestamp) to filter by. Optional. The default is not to filter by start time.
+	 * @param endDate Lower bound (exclusive) for an appointment's end time (as a RFC 3339 timestamp) to filter by. Optional. The default is not to filter by start time.
 	 * @return list of Activity objects.
 	 * @throws IOException
 	 * @throws JSONException

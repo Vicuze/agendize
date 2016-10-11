@@ -7,11 +7,20 @@ import java.util.Map;
 import mx.agendize.api.v2.reference.AgendizeObject;
 import mx.agendize.api.v2.reference.Time;
 
+/**
+ * Class representing an activity.
+ * @author Victor
+ *
+ */
 public class Activity extends AgendizeObject {
 
+	/** Type of the activity. Values: 'appointment', 'call', 'note', 'email', 'sms' */
 	private String type; 
+	/** Title of the activity. */
 	private Title title; 
+	/** The date time of the activity. */
 	private Time date; 
+	/** URL link to the activity resource description. */
 	private String selfLink; 
 	
 	/**

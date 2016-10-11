@@ -2,11 +2,20 @@ package mx.agendize.api.v2.emails.reference;
 
 import java.util.List;
 
+/**
+ * Class representing a marketing email. 
+ * @author <a href="mailto:victor@agendize.com">victor@agendize.com</a>
+ *
+ */
 public class MarketingEmail {
 
+	/** The id of the email template to use. */
 	private Integer templateId; 
+	/** The subject of the email. Only required if you don't use an email template */
 	private String subject;  
+	/** The content of the email. Only required if you don't use an email template */
 	private String html;  
+	/** List of recipients. */
 	private List<Integer> recipients;
 	
 	/**

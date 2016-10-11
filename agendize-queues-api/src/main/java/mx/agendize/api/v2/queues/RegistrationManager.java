@@ -17,6 +17,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * Class for queues registrations management.
+ * @author <a href="mailto:victor@agendize.com">victor@agendize.com</a>
+ *
+ */
 public class RegistrationManager extends AgendizeApiManager {
 
 	static final Logger logger = LogManager.getLogger(RegistrationManager.class);
@@ -158,7 +163,7 @@ public class RegistrationManager extends AgendizeApiManager {
 	/**
 	 * Next registration of the queue.
 	 * @param queueId
-	 * @return
+	 * @return Registration the next Registration object.
 	 * @throws JSONException
 	 * @throws AgendizeException
 	 */
@@ -189,5 +194,4 @@ public class RegistrationManager extends AgendizeApiManager {
 		}
 		return result;
 	}
-	
 }

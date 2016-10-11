@@ -22,18 +22,18 @@ import org.json.JSONObject;
 
 /**
  * Class for management of Agendize objects: Appointments, clients, companies, services, staff, settings, resources, widget.
- * Contacins method to convert JSONObject and JSONArray to object and vice versa.
+ * Contains method to convert JSONObject and JSONArray to object and vice versa.
  * Info about the JSON structure here <a target="_blank" href="http://developers.agendize.com/v2/scheduling/reference/index.jsp">http://developers.agendize.com/v2/scheduling/reference/index.jsp</a>
  * @author <a href="mailto:victor@agendize.com">victor@agendize.com</a>
  *
  */
 public class AgendizeSchedulingObjectHelper {
 
+	/** parameter names */
 	private static final String TYPE = "type";
 	private static final String WEBSITE_LINK = "websiteLink";
 	private static final String FORM = "form";
 	private static final String TITLE = "title";
-	/** parameter names */
 	private static final String STATUS = "status";
 	private static final String CREATED = "created";
 	private static final String LANGUAGE = "language";
@@ -125,7 +125,7 @@ public class AgendizeSchedulingObjectHelper {
 
 	/**
 	 * Converts a JSONArray in a list of Resource objects
-	 * @param resourcesJson json representing the resource. See <a target="_blank" href="http://developers.agendize.com/v2/scheduling/reference/resources/index.jsp">http://developers.agendize.com/v2/scheduling/reference/resources/index.jsp</a>
+	 * @param resourcesJson json representing the resource list. See <a target="_blank" href="http://developers.agendize.com/v2/scheduling/reference/resources/index.jsp">http://developers.agendize.com/v2/scheduling/reference/resources/index.jsp</a>
 	 * @return The list of resource objects.
 	 * @throws JSONException
 	 */
@@ -387,7 +387,7 @@ public class AgendizeSchedulingObjectHelper {
 	}
 
 	/**
-	 * Converts a JSONObject from the API into a Appointment object. /!\ Incomplete (missing end, created, form, status, notes)
+	 * Converts a JSONObject from the API into a Appointment object. 
 	 * @param appointmentJson json representing the Appointment. See <a target="_blank" href="http://developers.agendize.com/v2/scheduling/reference/appointments/index.jsp">http://developers.agendize.com/v2/scheduling/reference/appointments/index.jsp</a>
 	 * @return The Appointment object
 	 * @throws AgendizeException 
@@ -440,6 +440,11 @@ public class AgendizeSchedulingObjectHelper {
 		return result;
 	}
 
+	/**
+	 * Converts a JSONArray from the API into a list of SchedulingFormField Object
+	 * @param formJson json representing the list of form fields.
+	 * @return the list of SchedulingFormField objects
+	 */
 	private static List<SchedulingFormField> jsonArrayToSchedulingFormFieldList(JSONArray formJson) {
 		List<SchedulingFormField> result = new ArrayList<SchedulingFormField>();
 		for(int i=0;i<formJson.length();i++){
@@ -448,6 +453,11 @@ public class AgendizeSchedulingObjectHelper {
 		return result;
 	}
 
+	/**
+	 * Converts a JSONObject to a SchedulingFormField object.
+	 * @param formFieldJson json representing the SchedulingFormField. See <a target="_blank" href="http://developers.agendize.com/v2/scheduling/reference/forms">http://developers.agendize.com/v2/scheduling/reference/forms</a>
+	 * @return the SchedulingFormField object
+	 */
 	private static SchedulingFormField jsonObjectToSchedulingFormField(JSONObject formFieldJson) {
 		SchedulingFormField result = new SchedulingFormField();
 		result.setTitle(formFieldJson.getString(TITLE));
@@ -533,7 +543,7 @@ public class AgendizeSchedulingObjectHelper {
 	}
 
 	/**
-	 * Converts a JSONArray from the API into a list of WorkingHours Object
+	 * Converts a JSONArray from the API into a list of WorkingHours Objects
 	 * @param workingHoursJson json representing the working hours
 	 * @return lis of WorkingHours objects.
 	 * @throws JSONException

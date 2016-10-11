@@ -13,12 +13,15 @@ import mx.agendize.api.v2.calls.reference.Call;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * Class for Calls management.
+ * @author <a href="mailto:victor@agendize.com">victor@agendize.com</a>
+ *
+ */
 public class CallsManager extends AgendizeApiManager {
-
 
 	private static final String END_DATE = "endDate";
 	private static final String START_DATE = "startDate";
@@ -26,7 +29,7 @@ public class CallsManager extends AgendizeApiManager {
 	static final Logger logger = LogManager.getLogger(CallsManager.class);
 	
 	/**
-	 * @param apiKey API Key. No API Key? <a target="_blank" href="http://www.agendize.com/account#app" >Get one here</a>
+	 * @param apiKey API Key. No API Key? <a target="_blank" href="http://app.agendize.com/account#app" >Get one here</a>
 	 * @param token SSO token. See <a target="_blank" href="http://developers.agendize.com/en/p/authentication" >http://developers.agendize.com/en/p/authentication</a>
 	 * @throws IOException in case the API key or SSO token are not valid
 	 */
@@ -39,7 +42,7 @@ public class CallsManager extends AgendizeApiManager {
 	 * @param startDate Start date.
 	 * @param endDate End date.
 	 * @param search Free text search terms to find call that match caller number or called number.
-	 * @return
+	 * @return list of calls retrieved from the criteria
 	 * @throws IOException
 	 * @throws AgendizeException
 	 */
@@ -144,7 +147,7 @@ public class CallsManager extends AgendizeApiManager {
 	}
 	
 	/**
-	 * Updates an call.
+	 * Updates a call.
 	 * @param call Call. Must have an id. 
 	 * @return updated call.
 	 * @throws AgendizeException

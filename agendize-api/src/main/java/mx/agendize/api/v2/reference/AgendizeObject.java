@@ -9,6 +9,7 @@ public abstract class AgendizeObject {
 
 	/** Identifier of the Agendize object. Read-only. */
 	protected Integer id;
+	
 	/**
 	 * @return the id
 	 */

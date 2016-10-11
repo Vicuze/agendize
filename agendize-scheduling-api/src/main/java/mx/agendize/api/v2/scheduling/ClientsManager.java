@@ -13,7 +13,6 @@ import mx.agendize.api.v2.scheduling.reference.Client;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -30,7 +29,7 @@ public class ClientsManager extends AgendizeApiManager {
 	private static final String SEARCH = "search";
 
 	/**
-	 * @param apiKey API Key. No API Key? <a target="_blank" href="http://www.agendize.com/account#app" >Get one here</a>
+	 * @param apiKey API Key. No API Key? <a target="_blank" href="http://app.agendize.com/account#app" >Get one here</a>
 	 * @param token SSO token. See <a target="_blank" href="http://developers.agendize.com/en/p/authentication" >http://developers.agendize.com/en/p/authentication</a>
 	 * @throws IOException in case the API key or SSO token are not valid
 	 */

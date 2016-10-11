@@ -99,18 +99,12 @@ public class FormResult {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-
-	/**
-	 * @return the fields
-	 */
-	public List<FormFieldResult> getFields() {
+	
+	public List<FormFieldResult> getFieldsResults() {
 		return fieldsResults;
 	}
 
-	/**
-	 * @param fields the fields to set
-	 */
-	public void setFields(List<FormFieldResult> fieldsResults) {
+	public void setFieldsResults(List<FormFieldResult> fieldsResults) {
 		this.fieldsResults = fieldsResults;
 	}
 

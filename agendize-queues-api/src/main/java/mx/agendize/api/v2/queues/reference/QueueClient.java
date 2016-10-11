@@ -2,13 +2,23 @@ package mx.agendize.api.v2.queues.reference;
 
 import mx.agendize.api.v2.reference.AgendizeObject;
 
+/**
+ * Class representing the client of a queue.
+ * @author <a href="mailto:victor@agendize.com">victor@agendize.com</a>
+ * TODO see if possible to extend Person
+ */
 public class QueueClient extends AgendizeObject {
 
+	/** First name of the client. */
 	private String firstName;
+	/**  Last name of the client. */
 	private String lastName; 
+	/** Email address of the client. */
 	private String emailAddress; 
+	/** Phone number of the client. */
+	private String phoneNumber; 
+	/** URL link to the client resource description. */
 	private String selfLink;
-	
 	
 	/**
 	 * 
@@ -16,19 +26,16 @@ public class QueueClient extends AgendizeObject {
 	public QueueClient() {
 		super();
 	}
-	/**
-	 * @param firstName
-	 * @param lastName
-	 * @param emailAddress
-	 * @param selfLink
-	 */
-	public QueueClient(String firstName, String lastName, String emailAddress, String selfLink) {
+
+	public QueueClient(String firstName, String lastName, String emailAddress, String phoneNumber, String selfLink) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.emailAddress = emailAddress;
+		this.phoneNumber = phoneNumber;
 		this.selfLink = selfLink;
 	}
+
 	/**
 	 * @return the firstName
 	 */
@@ -76,5 +83,11 @@ public class QueueClient extends AgendizeObject {
 	 */
 	public final void setSelfLink(String selfLink) {
 		this.selfLink = selfLink;
+	}
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 }

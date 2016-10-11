@@ -92,7 +92,7 @@ public class SettingsManager extends AgendizeApiManager {
 	 * Gets all the settings for a given group. Groups can be "notifications", "items", "contact", "rules","widget". See <a href="http://developers.agendize.com/v2/scheduling/reference/settings/index.jsp">http://developers.agendize.com/v2/scheduling/reference/settings/index.jsp</a>
 	 * @param companyId
 	 * @param group
-	 * @return
+	 * @return all the settings for the specific group. 
 	 * @throws IOException
 	 */
 	private List<Setting> getSettingsForGroup(int companyId, SettingGroup group) throws IOException{
@@ -111,7 +111,7 @@ public class SettingsManager extends AgendizeApiManager {
 	/**
 	 * Returns all the notification settings.
 	 * @param companyId
-	 * @return
+	 * @return all the notification settings.
 	 * @throws IOException
 	 */
 	public List<Setting> getNotificationSettings(int companyId) throws IOException{
@@ -164,7 +164,7 @@ public class SettingsManager extends AgendizeApiManager {
 	/**
 	 * This will deactivate all the notifications. /!\ If you want to reactivate the notifications later, don't forget to save the current settings before;
 	 * @param companyId
-	 * @return 
+	 * @return updated settings
 	 * @throws AgendizeException 
 	 * @throws IOException 
 	 * @throws JSONException 
@@ -207,5 +207,4 @@ public class SettingsManager extends AgendizeApiManager {
 		settings.add(new Setting(SettingGroup.NOTIFICATIONS, CLIENT_SMS_DASHBOARD_CHANGE, "false"));
 		return update(companyId, settings);
 	}
-	
 }

@@ -22,7 +22,7 @@ import org.xml.sax.SAXException;
  */
 public class DataApiHelper {
 
-	protected static final String DATA_API_URL = /*"http://az2."+*/"https://www."+"agendize.com/api/1.0/data";
+	protected static final String DATA_API_URL = /*"http://az2."+*/"https://api."+"agendize.com/api/1.0/data";
 
 	private static final String SCOPE = "scope";
 	private static final String START_DATE = "start-date";
@@ -65,7 +65,7 @@ public class DataApiHelper {
 	}
 	
 	/**
-	 * HTTP GET request to https://www.agendize.com/api/1.0/data with the provided scope and properties.
+	 * HTTP GET request to https://api.agendize.com/api/1.0/data with the provided scope and properties.
 	 * @param scope Scope of the request.
 	 * @param properties List of properties, will be passed in the request URL.
 	 * @return Request response as String.

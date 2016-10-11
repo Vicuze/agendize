@@ -14,16 +14,20 @@ import mx.agendize.api.v2.forms.reference.FormResult;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * Class for forms management.
+ * @author <a href="mailto:victor@agendize.com">victor@agendize.com</a>
+ *
+ */
 public class FormsManager extends AgendizeApiManager {
 	
 	static final Logger logger = LogManager.getLogger(FormsManager.class);
 
 	/**
-	 * @param apiKey API Key. No API Key? <a target="_blank" href="http://www.agendize.com/account#app" >Get one here</a>
+	 * @param apiKey API Key. No API Key? <a target="_blank" href="http://app.agendize.com/account#app" >Get one here</a>
 	 * @param token SSO token. See <a target="_blank" href="http://developers.agendize.com/en/p/authentication" >http://developers.agendize.com/en/p/authentication</a>
 	 * @throws IOException in case the API key or SSO token are not valid
 	 */
@@ -186,6 +190,4 @@ public class FormsManager extends AgendizeApiManager {
 		}
 		return result;
 	}
-
-
 }

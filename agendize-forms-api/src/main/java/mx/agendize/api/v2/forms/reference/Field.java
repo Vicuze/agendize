@@ -75,8 +75,6 @@ public class Field {
 		super();
 	}
 	/**
-	 * @param button
-	 * @param author
 	 * @param type
 	 * @param label
 	 * @param mandatory

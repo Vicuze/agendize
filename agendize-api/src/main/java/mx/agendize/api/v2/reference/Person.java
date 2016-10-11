@@ -2,7 +2,7 @@ package mx.agendize.api.v2.reference;
 
 
 /**
- * Can be a client or a staff member.
+ * Can be a scheuling client or a staff member.
  * @author <a href="mailto:victor@agendize.com">victor@agendize.com</a>
  *
  */

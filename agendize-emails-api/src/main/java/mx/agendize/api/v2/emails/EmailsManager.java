@@ -16,6 +16,11 @@ import org.apache.logging.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * Class for emails management.
+ * @author <a href="mailto:victor@agendize.com">victor@agendize.com</a>
+ *
+ */
 public class EmailsManager extends AgendizeApiManager {
 	
 	private static final String TEMPLATES = "/templates";
@@ -140,14 +145,16 @@ public class EmailsManager extends AgendizeApiManager {
 		String json = AgendizeEmailsObjectHelper.marketingEmailToJSONObject(marketingEmail).toString();
 		String marketingEmailString = APIUtils.postRequest(EMAILS_API_URL + SEND, json, properties);
 		JSONObject jsonObject = new JSONObject(marketingEmailString);
+		
   		if(jsonObject.has("error")){
   			JSONObject errorJson = jsonObject.getJSONObject("error");
   			logger.error("Error in sending marketing email: " + errorJson.getInt("code")+" "+errorJson.getString("reason")+" - "+errorJson.getString("message"));
   		} else {
+  			//TODO gérer la réponse. 
   			logger.info("MarketingEmail sent succesfully.");
+  			// JSONObject jsonObject = new JSONObject(marketingEmailString);
+  			// EmailTemplate result = AgendizeEmailsObjectHelper.jsonObjectToEmailTemplate(jsonObject);
+  	        // return result;
   		}
-		//JSONObject jsonObject = new JSONObject(emailTemplateString);
-		//EmailTemplate result = AgendizeEmailsObjectHelper.jsonObjectToEmailTemplate(jsonObject);
-        //return result;
 	}
 }

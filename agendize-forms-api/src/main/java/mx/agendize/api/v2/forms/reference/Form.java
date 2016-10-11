@@ -10,6 +10,16 @@ public class Form extends AgendizeObject {
 	private String title; 
 	private String submitMessage; 
 	private List<Field> fields;
+	
+	public Form() {
+		super();
+	}
+
+	public Form(int id, String name){
+		this.id = id;
+		this.name = name;
+	}
+	
 	/**
 	 * @return the name
 	 */

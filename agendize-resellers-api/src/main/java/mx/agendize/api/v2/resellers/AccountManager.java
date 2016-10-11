@@ -8,7 +8,6 @@ import java.util.Properties;
 import mx.agendize.api.APIUtils;
 import mx.agendize.api.AgendizeApiManager;
 import mx.agendize.api.AgendizeException;
-import mx.agendize.api.v2.reference.AgendizeObjectHelper;
 import mx.agendize.api.v2.resellers.reference.Account;
 import mx.agendize.api.v2.resellers.reference.AgendizeResellersObjectHelper;
 
@@ -17,7 +16,11 @@ import org.apache.logging.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/** Class to manage account accounts as a reseller. */
+/**
+ * Class to manage accounts as a reseller.
+ * @author <a href="mailto:victor@agendize.com">victor@agendize.com</a>
+ *
+ */
 public class AccountManager extends AgendizeApiManager {
 	
 	static final Logger logger = LogManager.getLogger(AccountManager.class);
@@ -25,7 +28,7 @@ public class AccountManager extends AgendizeApiManager {
 	private static final String SEARCH = "search";
 	
 	/**
-	 * @param apiKey API Key. No API Key? <a target="_blank" href="http://www.agendize.com/account#app" >Get one here</a>
+	 * @param apiKey API Key. No API Key? <a target="_blank" href="http://app.agendize.com/account#app" >Get one here</a>
 	 * @param token SSO token. See <a target="_blank" href="http://developers.agendize.com/en/p/authentication" >http://developers.agendize.com/en/p/authentication</a>
 	 * @throws IOException in case the API key or SSO token are not valid
 	 */

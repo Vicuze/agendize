@@ -3,11 +3,12 @@ package mx.agendize.api.v2.resellers.reference;
 import java.util.ArrayList;
 import java.util.Currency;
 import java.util.List;
-import java.util.Locale;
-import java.util.TimeZone;
 
 import mx.agendize.api.AgendizeException;
+import mx.agendize.api.v2.reference.AgendizeObjectHelper;
 import mx.agendize.api.v2.reference.Language;
+import mx.agendize.api.v2.reference.AccountPreferences;
+import mx.agendize.api.v2.resellers.reference.Account.Tool;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -16,6 +17,7 @@ import org.json.JSONObject;
 /**
  * Class for management of Account objects as a reseller.
  * Contains methods to convert JSONObject and JSONArray to object and vice versa.
+ * Info about the JSON structure here <a target="_blank" href="http://developers.agendize.com/v2/resellers/reference">http://developers.agendize.com/v2/resellers/reference</a>
  * @author <a href="mailto:victor@agendize.com">victor@agendize.com</a>
  *
  */
@@ -41,8 +43,6 @@ public class AgendizeResellersObjectHelper {
 	private static final String LAST_NAME = "lastName";
 	private static final String FIRST_NAME = "firstName";
 	private static final String CURRENCY = "currency";
-	private static final String LANGUAGE = "language";
-	private static final String TIME_ZONE = "timeZone";
 
 	/**
 	 * Converts a JSONArray into a list of Account objects
@@ -93,7 +93,7 @@ public class AgendizeResellersObjectHelper {
 			result.setOrganization(accountJson.getString(ORGANIZATION));
 		}
 		if(accountJson.has(PREFERENCES)){
-			result.setPreferences(jsonObjectToPreferences(accountJson.getJSONObject(PREFERENCES)));
+			result.setPreferences(AgendizeObjectHelper.jsonObjectToPreferences(accountJson.getJSONObject(PREFERENCES)));
 		}
 		if(accountJson.has(CURRENCY)){
 			result.setCurrency(Currency.getInstance(accountJson.getString(CURRENCY)));
@@ -137,10 +137,10 @@ public class AgendizeResellersObjectHelper {
 	 * @param jsonArray json representing the list of tools. See <a target="_blank" href="http://developers.agendize.com/v2/resellers/reference/accounts/index.jsp">http://developers.agendize.com/v2/resellers/reference/accounts/index.jsp</a>
 	 * @return the list of tools.
 	 */
-	private static List<String> JsonArrayToToolsList(JSONArray toolsJson) {
-		List<String> result = new ArrayList<String>();
+	private static List<Tool> JsonArrayToToolsList(JSONArray toolsJson) {
+		List<Tool> result = new ArrayList<Tool>();
 		for(int j= 0; j<toolsJson.length(); j++){
-    		result.add((String) toolsJson.get(j));
+    		result.add(Tool.get((String) toolsJson.get(j)));
     	}
 		return result; 
 	}
@@ -162,25 +162,9 @@ public class AgendizeResellersObjectHelper {
 	}
 
 	/**
-	 * Converts a JSONObject from the API into an Preferences (timezone, language) object
-	 * @param preferencesJson
-	 * @return
-	 */
-	private static Preferences jsonObjectToPreferences(JSONObject preferencesJson) {
-		Preferences result = new Preferences();
-		if(preferencesJson.has(TIME_ZONE)){
-			result.setTimeZone(preferencesJson.getString(TIME_ZONE));
-		}
-		if(preferencesJson.has(LANGUAGE)){
-			result.setLanguage(Language.get(preferencesJson.getString(LANGUAGE)));
-		}
-		return result; 
-	}
-
-	/**
-	 * 
-	 * @param account
-	 * @return
+	 * Converts an Account object into a JSONObject for API use.
+	 * @param account the Account object
+	 * @return JSONObject representing the account
 	 */
 	public static JSONObject accountToJSONObject(Account account) {
 		JSONObject result = new JSONObject();
@@ -209,7 +193,7 @@ public class AgendizeResellersObjectHelper {
 			result.put(RESELLER_ID, account.getResellerId());
 		} 
 		if(account.getPreferences() != null){
-			result.put(PREFERENCES, preferencesToJsonObject(account.getPreferences()));
+			result.put(PREFERENCES, AgendizeObjectHelper.preferencesToJsonObject(account.getPreferences()));
 		}
 		if(account.getCredit() != null){
 			result.put(CREDIT, account.getCredit());
@@ -229,6 +213,11 @@ public class AgendizeResellersObjectHelper {
 		return result;
 	}
 
+	/**
+	 * Converts a WhiteLabelSettings object into a JSONObject for API use.
+	 * @param whiteLabel the WhiteLabelSettings object.
+	 * @return JSONObject representing the White Label Settings.
+	 */
 	private static JSONObject whiteLabelSettingsToJSONObject(WhiteLabelSettings whiteLabel) {
 		JSONObject result = new JSONObject(); 
 		if(whiteLabel.getLogoURL() != null && !"".equals(whiteLabel.getLogoURL())){
@@ -243,27 +232,26 @@ public class AgendizeResellersObjectHelper {
 		return result; 
 	}
 
-	private static JSONArray toolsListToJSONArray(List<String> tools) {
+	/**
+	 * Converts a List of Tool objects into a JSONArray for API use.
+	 * @param tools list of Tool objects 
+	 * @return JSONArray representing the list of tools
+	 */
+	private static JSONArray toolsListToJSONArray(List<Tool> tools) {
 		JSONArray result = new JSONArray();
 		if(tools!=null){
-			for(String tool: tools){
-				result.put(tool);
+			for(Tool tool: tools){
+				result.put(tool.getCode());
 			}
 		}
 		return result;
 	}
-
-	private static JSONObject preferencesToJsonObject(Preferences preferences) {
-		JSONObject result = new JSONObject();
-		if(preferences.getTimeZone() != null){
-			result.put(TIME_ZONE, preferences.getTimeZone());
-		}
-		if(preferences.getLanguage() != null){
-			result.put(LANGUAGE, preferences.getLanguage().getCode());
-		}
-		return result;
-	}
-
+	
+	/**
+	 * Converts a Profile object into a JSONObject for API use.
+	 * @param profile the Profile object
+	 * @return JSONObject represeting the profile
+	 */
 	private static JSONObject profileToJsonObject(Profile profile) {
 		JSONObject result = new JSONObject();
 		if(profile.getId() != null){
@@ -275,6 +263,11 @@ public class AgendizeResellersObjectHelper {
 		return result;
 	}
 
+	/**
+	 * Converts a JSONArray to a list of Account objects
+	 * @param accountsJson json array representing the list of accounts.
+	 * @return List of Account objects.
+	 */
 	public static List<Account> jsonArrayToSimpleAccount(JSONArray accountsJson) {
 		List<Account> result = new ArrayList<Account>();
 		for(int j= 0; j<accountsJson.length(); j++){
@@ -283,6 +276,11 @@ public class AgendizeResellersObjectHelper {
     	return result;
 	}
 
+	/**
+	 * Converts a JSONObject from the API into an Account object
+	 * @param accountJson json representing the account. See <a target="_blank" href="http://developers.agendize.com/v2/resellers/reference/accounts/index.jsp">http://developers.agendize.com/v2/resellers/reference/accounts/index.jsp</a>
+	 * @return the Account object.
+	 */
 	private static Account jsonObjectToSimpleAccount(JSONObject accountJson) {
 		Account result = new Account();
 		if(accountJson.has(ID)){

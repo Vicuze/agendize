@@ -13,9 +13,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Class for management of Agendize objects: Appointments, clients, companies, services, staff, settings, resources, widget.
- * Contacins method to convert JSONObject and JSONArray to object and vice versa.
- * Info about the JSON structure here <a target="_blank" href="http://developers.agendize.com/v2/scheduling/reference/index.jsp">http://developers.agendize.com/v2/scheduling/reference/index.jsp</a>
+ * Class for management of Agendize API generic objects: Time, Person, Picture, Address, Strings...
+ * Contains methods to convert JSONObject and JSONArray to object and vice versa.
  * @author <a href="mailto:victor@agendize.com">victor@agendize.com</a>
  *
  */
@@ -43,8 +42,11 @@ public class AgendizeObjectHelper {
 	private static final String FIRST_NAME = "firstName";
 	private static final String DESCRIPTION = "description";
 	private static final String ID = "id";
+	private static final String LANGUAGE = "language";
 	
-	/** Date format used in JSON */
+	/** Date format used in JSON 
+	 * TODO peut-être faire hériter les classes "Agendize***ObjectHelper" de cette classe pour pouvoir partager ceci.
+	 * */
 	private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 
 	/**
@@ -81,6 +83,11 @@ public class AgendizeObjectHelper {
 		return new Time(timeJson.getString(TIME_ZONE), sdf.getCalendar().getTime());
 	}
 	
+	/**
+	 * Converts a Person object into a JSONObject for API use.
+	 * @param person the Person object
+	 * @return JSONObject representing the person. 
+	 */
 	public static JSONObject personToJSONObject(Person person) {
 		JSONObject result = new JSONObject();
 		if(person.getId() != null){
@@ -219,7 +226,6 @@ public class AgendizeObjectHelper {
 	 * </pre>
 	 * @return the Address object.
 	 */
-	
 	public static Address jsonObjectToAddress(JSONObject addressJson) {
 		Address result = new Address();
 		if(addressJson.has(STREET)){
@@ -243,6 +249,11 @@ public class AgendizeObjectHelper {
 		return result;
 	}
 
+	/**
+	 * Converts a JSONArray to a list of Strings
+	 * @param stringsJson json representing the list of Strings.
+	 * @return List of Strings.
+	 */
 	public static List<String> jsonArrayToStringList(JSONArray stringsJson) {
 		List<String> result = new ArrayList<String>();
 		for(int j= 0; j<stringsJson.length(); j++){
@@ -251,12 +262,49 @@ public class AgendizeObjectHelper {
     	return result;
 	}
 
+	/**
+	 * Converts a list of String into a JSONArray for API use.
+	 * @param strings list of Strings
+	 * @return JSONArray representing the list of Strings.
+	 */
 	public static JSONArray stringListToJSONArray(List<String> strings) {
 		JSONArray result = new JSONArray();
 		if(strings!=null){
 			for(String s: strings){
 				result.put(new JSONObject(s));
 			}
+		}
+		return result;
+	}
+
+	/**
+	 * Converts a JSONObject from the API into a Preferences (timezone, language) object
+	 * @param preferencesJson json representing the preferences. See <a target="_blank" href="http://developers.agendize.com/v2/resellers/reference/accounts/index.jsp">http://developers.agendize.com/v2/resellers/reference/accounts/index.jsp</a>
+	 * @return the Preferences object.
+	 */
+	public static AccountPreferences jsonObjectToPreferences(JSONObject preferencesJson) {
+		AccountPreferences result = new AccountPreferences();
+		if(preferencesJson.has(TIME_ZONE)){
+			result.setTimeZone(preferencesJson.getString(TIME_ZONE));
+		}
+		if(preferencesJson.has(LANGUAGE)){
+			result.setLanguage(Language.get(preferencesJson.getString(LANGUAGE)));
+		}
+		return result; 
+	}
+
+	/**
+	 * Converts a Preferences object into a JSONObject for API use.
+	 * @param preferences the Preferences object.
+	 * @return JSONObject representing the preferences.
+	 */
+	public static JSONObject preferencesToJsonObject(AccountPreferences preferences) {
+		JSONObject result = new JSONObject();
+		if(preferences.getTimeZone() != null){
+			result.put(TIME_ZONE, preferences.getTimeZone());
+		}
+		if(preferences.getLanguage() != null){
+			result.put(LANGUAGE, preferences.getLanguage().getCode());
 		}
 		return result;
 	}

@@ -7,6 +7,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * Class for management of Agendize Emails API objects: Email Templates, Messages.
+ * Contains method to convert JSONObject and JSONArray to object and vice versa.
+ * Info about the JSON structure here <a target="_blank" href="http://developers.agendize.com/v2/messages/emails/reference">http://developers.agendize.com/v2/messages/emails/reference</a>
+ * @author <a href="mailto:victor@agendize.com">victor@agendize.com</a>
+ * 
+ */
 public class AgendizeEmailsObjectHelper {
 
 	private static final String NAME = "name";

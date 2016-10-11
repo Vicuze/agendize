@@ -8,10 +8,10 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>agendize-platform-api</artifactId>
+	<artifactId>agendize-account-api</artifactId>
 	<packaging>jar</packaging>
 
-	<name>agendize-platform-api</name>
+	<name>agendize-account-api</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>

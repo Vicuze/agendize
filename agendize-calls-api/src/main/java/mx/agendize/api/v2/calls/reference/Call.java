@@ -7,6 +7,11 @@ import java.util.Map;
 import mx.agendize.api.v2.reference.AgendizeObject;
 import mx.agendize.api.v2.reference.Time;
 
+/**
+ * Class representing a call. 
+ * @author <a href="mailto:victor@agendize.com">victor@agendize.com</a>
+ *
+ */
 public class Call extends AgendizeObject {
 
 	/**
@@ -46,7 +51,7 @@ public class Call extends AgendizeObject {
 	    /**
 	     * Get a Call Status by its code.
 	     * @param s code. ex: "completed".
-	     * @return The Country.
+	     * @return The Call Status.
 	     */
 	    public static CallStatus get(String s) {
 	        return lookup.get(s);

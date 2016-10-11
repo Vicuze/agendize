@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mx.agendize.api.AgendizeException;
-import mx.agendize.api.data.objects.FormDetails;
+import mx.agendize.api.v2.forms.reference.Form;
 import mx.agendize.api.v2.queues.reference.Registration.RegistrationStatus;
 import mx.agendize.api.v2.reference.AgendizeObjectHelper;
 import mx.agendize.api.v2.scheduling.reference.AgendizeSchedulingObjectHelper;
@@ -14,8 +14,16 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * Class for management of Agendize Queuing API objects: Queues, Registrations.
+ * Contains methods to convert JSONObject and JSONArray to object and vice versa.
+ * Info about the JSON structure here <a target="_blank" href="http://developers.agendize.com/v2/queues/reference/index.jsp">http://developers.agendize.com/v2/queues/reference/index.jsp</a>
+ * @author <a href="mailto:victor@agendize.com">victor@agendize.com</a>
+ *
+ */
 public class AgendizeQueuesObjectHelper {
 
+	private static final String PHONE_NUMBER = "phoneNumber";
 	private static final String THANK_MESSAGE = "thankMessage";
 	private static final String WELCOME_MESSAGE = "welcomeMessage";
 	private static final String COMPANY = "company";
@@ -47,6 +55,13 @@ public class AgendizeQueuesObjectHelper {
     	return result;
 	}
 
+	/**
+	 * Converts a JSONObject from the API to a Queue object 
+	 * @param queueJson The JSONObject representing the queue. See <a target="_blank" href="http://developers.agendize.com/v2/queues/reference/queues/">http://developers.agendize.com/v2/queues/reference/queues/</a>
+	 * @return the Queue object
+	 * @throws JSONException
+	 * @throws AgendizeException
+	 */
 	public static Queue jsonObjectToQueue(JSONObject queueJson) throws JSONException, AgendizeException {
 		Queue result = new Queue();
 		result.setId(queueJson.getInt(ID));
@@ -64,12 +79,12 @@ public class AgendizeQueuesObjectHelper {
 		}
 		if(queueJson.has(COMPANY)){
 			JSONObject companyJson = queueJson.getJSONObject(COMPANY);
-			Company company = new Company(companyJson.getInt("id"), companyJson.getString(NAME));
+			Company company = new Company(companyJson.getInt(ID), companyJson.getString(NAME));
 			result.setCompany(company);
 		}
 		if(queueJson.has(FORM)){
 			JSONObject formJson = queueJson.getJSONObject(FORM);
-			FormDetails form = new FormDetails(formJson.getInt("id"), formJson.getString(NAME));
+			Form form = new Form(formJson.getInt(ID), formJson.getString(NAME));
 			result.setForm(form);
 		}
 		return result;
@@ -104,13 +119,20 @@ public class AgendizeQueuesObjectHelper {
 		}
 		if(queue.getForm() != null){
 			JSONObject formJson = new JSONObject(); 
-			formJson.put(ID, queue.getForm().getButtonId());
+			formJson.put(ID, queue.getForm().getId());
 			formJson.put(NAME, queue.getForm().getName());
 			result.put(FORM, formJson);
 		}
 		return result;
 	}
 
+	/**
+	 * Converts a JSONArray in a list of Registration objects
+	 * @param registrationsJson json representing the registration list. See <a target="_blank" href="http://developers.agendize.com/v2/queues/reference/registrations">http://developers.agendize.com/v2/queues/reference/registrations</a>
+	 * @return The list of Registration objects.
+	 * @throws JSONException
+	 * @throws AgendizeException
+	 */
 	public static List<Registration> jsonArrayToRegistrationList(JSONArray registrationsJson) throws JSONException, AgendizeException {
 		List<Registration> result = new ArrayList<Registration>();
 		for(int j= 0; j<registrationsJson.length(); j++){
@@ -119,6 +141,13 @@ public class AgendizeQueuesObjectHelper {
     	return result;
 	}
 
+	/**
+	 * Converts a JSONObject from the API to a Registration object 
+	 * @param registrationJson The JSONObject representing the registration. See <a target="_blank" href="http://developers.agendize.com/v2/queues/reference/registrations">http://developers.agendize.com/v2/queues/reference/registrations</a>
+	 * @return the Registration object
+	 * @throws JSONException
+	 * @throws AgendizeException
+	 */
 	public static Registration jsonObjectToRegistration(JSONObject registrationJson) throws JSONException, AgendizeException {
 		Registration result = new Registration();
 		result.setId(registrationJson.getInt(ID));
@@ -139,7 +168,12 @@ public class AgendizeQueuesObjectHelper {
 		}
 		return result; 
 	}
-
+	
+	/**
+	 * Converts a JSONObject from the API to a QueueClient object 
+	 * @param queueClientJson The JSONObject representing the queue client. See <a target="_blank" href="http://developers.agendize.com/v2/queues/reference/registrations">http://developers.agendize.com/v2/queues/reference/registrations</a>
+	 * @return the QueueClient object
+	 */
 	private static QueueClient jsonObjectToQueueClient(JSONObject queueClientJson) {
 		QueueClient result = new QueueClient();
 		if(queueClientJson.has(ID)){
@@ -151,6 +185,9 @@ public class AgendizeQueuesObjectHelper {
 		if(queueClientJson.has(LAST_NAME)){
 			result.setLastName(queueClientJson.getString(LAST_NAME));
 		}
+		if(queueClientJson.has(PHONE_NUMBER)){
+			result.setPhoneNumber(queueClientJson.getString(PHONE_NUMBER));
+		}
 		if(queueClientJson.has(EMAIL_ADDRESS)){
 			result.setEmailAddress(queueClientJson.getString(EMAIL_ADDRESS));
 		}
@@ -160,6 +197,11 @@ public class AgendizeQueuesObjectHelper {
 		return null;
 	}
 
+	/**
+	 * Converts a Registration object into a JSONObject for API use.
+	 * @param registration the Registration object
+	 * @return The JSONObject representing the registration. See <a target="_blank" href="http://developers.agendize.com/v2/queues/reference">http://developers.agendize.com/v2/queues/reference</a>
+	 */
 	public static JSONObject registrationToJSONObject(Registration registration) {
 		JSONObject result = new JSONObject(); 
 		if(registration.getId() != null){
@@ -183,6 +225,11 @@ public class AgendizeQueuesObjectHelper {
 		return result;
 	}
 
+	/**
+	 * Converts a QueueClient object into a JSONObject for API use.
+	 * @param client the QueueClient object
+	 * @return The JSONObject representing the QueueClient. See <a target="_blank" href="http://developers.agendize.com/v2/queues/reference">http://developers.agendize.com/v2/queues/reference</a>
+	 */
 	private static JSONObject queueClientToJSONObject(QueueClient client) {
 		JSONObject result = new JSONObject(); 
 		if(client.getId() != null && !"".equals(client.getId())){
@@ -197,10 +244,12 @@ public class AgendizeQueuesObjectHelper {
 		if(client.getEmailAddress() != null && !"".equals(client.getEmailAddress())){
 			result.put(EMAIL_ADDRESS, client.getEmailAddress());
 		}
+		if(client.getPhoneNumber() != null && !"".equals(client.getPhoneNumber())){
+			result.put(PHONE_NUMBER, client.getPhoneNumber());
+		}
 		if(client.getSelfLink() != null && !"".equals(client.getSelfLink())){
 			result.put(SELF_LINK, client.getSelfLink());
 		}
 		return result;
 	}
-
 }

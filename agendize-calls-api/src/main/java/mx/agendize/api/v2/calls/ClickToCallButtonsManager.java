@@ -15,13 +15,17 @@ import org.apache.logging.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * Class for Click to call buttons management.
+ * @author <a href="mailto:victor@agendize.com">victor@agendize.com</a>
+ *
+ */
 public class ClickToCallButtonsManager extends AgendizeApiManager {
 	
 	static final Logger logger = LogManager.getLogger(ClickToCallButtonsManager.class);
 
 	public ClickToCallButtonsManager(String apiKey, String token) {
 		super(apiKey, token);
-		// TODO Auto-generated constructor stub
 	}
 	
 	/**

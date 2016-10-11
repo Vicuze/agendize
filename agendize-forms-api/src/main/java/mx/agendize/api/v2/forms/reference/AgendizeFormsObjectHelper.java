@@ -10,6 +10,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * Class for management of Agendize Forms API objects: Forms, Forms results.
+ * Contains method to convert JSONObject and JSONArray to object and vice versa.
+ * Info about the JSON structure here <a target="_blank" href="http://developers.agendize.com/v2/forms/reference">http://developers.agendize.com/v2/forms/reference</a>
+ * @author <a href="mailto:victor@agendize.com">victor@agendize.com</a>
+ *
+ */
 public class AgendizeFormsObjectHelper {
 	private static final String TITLE = "title";
 	private static final String VALUES = "values";
@@ -20,11 +27,15 @@ public class AgendizeFormsObjectHelper {
 	private static final String TYPE = "type";
 	private static final String SUBMIT_MESSAGE = "submitMessage";
 	private static final String FIELDS = "fields";
-	private static final String DESCRIPTION = "description";
 	private static final String ID = "id";
 	private static final String AUTHOR = "author";
 	private static final String NAME = "name";
 
+	/**
+	 * Converts a JSONArray in a list of Form objects
+	 * @param formsJson json representing the Form list. See <a target="_blank" href="http://developers.agendize.com/v2/forms/reference">http://developers.agendize.com/v2/forms/reference</a>
+	 * @return The list of Form objects.
+	 */
 	public static List<Form> jsonArrayToFormsList(JSONArray formsJson) {
 		List<Form> result = new ArrayList<Form>();
 		for(int j= 0; j<formsJson.length(); j++){
@@ -33,6 +44,11 @@ public class AgendizeFormsObjectHelper {
     	return result;
 	}
 
+	/**
+	 * Converts a JSONObject from the API to a Form object.
+	 * @param formJson json representing the Form. See <a target="_blank" href="http://developers.agendize.com/v2/forms/reference">http://developers.agendize.com/v2/forms/reference</a> 
+	 * @return The Form object
+	 */
 	public static Form jsonObjectToForm(JSONObject formJson) {
 		Form result = new Form();
 		result.setId(formJson.getInt(ID));
@@ -50,7 +66,12 @@ public class AgendizeFormsObjectHelper {
 		}
 		return result;
 	}
-
+	
+	/**
+	 * Converts a JSONArray in a list of Field objects
+	 * @param fieldsJson json representing the Field list. See <a target="_blank" href="http://developers.agendize.com/v2/forms/reference/forms">http://developers.agendize.com/v2/forms/reference/forms</a>
+	 * @return the list of Field objects
+	 */
 	private static List<Field> jsonArrayToFieldList(JSONArray fieldsJson) {
 		List<Field> result = new ArrayList<Field>();
 		for(int j= 0; j<fieldsJson.length(); j++){
@@ -58,7 +79,12 @@ public class AgendizeFormsObjectHelper {
     	}
     	return result;
 	}
-
+	
+	/**
+	 * Converts a JSONObject from the API to a Field object.
+	 * @param fieldJson json representing the Field. See <a target="_blank" href="http://developers.agendize.com/v2/forms/reference/forms">http://developers.agendize.com/v2/forms/reference/forms</a> 
+	 * @return The Field object
+	 */
 	private static Field jsonObjectToField(JSONObject fieldJson) {
 		Field result = new Field();
 		result.setId(fieldJson.getString(ID));//TODO open JIRA: format n'est pas bon.
@@ -125,7 +151,7 @@ public class AgendizeFormsObjectHelper {
 	}
 	
 	/**
-	 * Converts a field object into a JSONObject for API use.
+	 * Converts a Field object into a JSONObject for API use.
 	 * @param field the field object.
 	 * @return JSONObject representing the field.
 	 */
@@ -147,7 +173,12 @@ public class AgendizeFormsObjectHelper {
 		}
 		return result;
 	}
-
+	
+	/**
+	 * Converts a JSONArray in a list of FormResult objects
+	 * @param formResultsJson json representing the Form Result list. See <a target="_blank" href="http://developers.agendize.com/v2/forms/reference/results">httphttp://developers.agendize.com/v2/forms/reference/results</a>
+	 * @return The list of FormResult objects
+	 */
 	public static List<FormResult> jsonArrayToFormResultList(JSONArray formResultsJson) {
 		List<FormResult> result = new ArrayList<FormResult>();
 		for(int j= 0; j<formResultsJson.length(); j++){
@@ -156,6 +187,11 @@ public class AgendizeFormsObjectHelper {
     	return result;
 	}
 
+	/**
+	 * Converts a JSONObject from the API to a FormResult object.
+	 * @param formResultJson json representing the Field. See <a target="_blank" href="http://developers.agendize.com/v2/forms/reference/forms">http://developers.agendize.com/v2/forms/reference/forms</a>
+	 * @return the FormResult Object
+	 */
 	public static FormResult jsonObjectToFormResult(JSONObject formResultJson) {
 		FormResult result = new FormResult(); 
 		result.setId(formResultJson.getInt(ID));
@@ -179,5 +215,4 @@ public class AgendizeFormsObjectHelper {
 		}
 		return result;
 	}
-
 }

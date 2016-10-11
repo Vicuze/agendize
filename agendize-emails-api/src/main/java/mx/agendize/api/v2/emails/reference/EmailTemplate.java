@@ -2,10 +2,18 @@ package mx.agendize.api.v2.emails.reference;
 
 import mx.agendize.api.v2.reference.AgendizeObject;
 
+/**
+ * Class representing an email template.
+ * @author <a href="mailto:victor@agendize.com">victor@agendize.com</a>
+ *
+ */
 public class EmailTemplate extends AgendizeObject {
 
+	/** Subject of the message template. */
 	private String subject; 
+	/** HTML body of the message template. */
 	private String html;
+	/** Name of the message template. */
 	private String name;
 
 	public EmailTemplate(){

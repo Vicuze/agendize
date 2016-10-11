@@ -9,7 +9,6 @@ import java.util.Properties;
 import mx.agendize.api.APIUtils;
 import mx.agendize.api.AgendizeApiManager;
 import mx.agendize.api.AgendizeException;
-import mx.agendize.api.JSONHelper;
 import mx.agendize.api.TimeHelper;
 import mx.agendize.api.v2.reference.Time;
 import mx.agendize.api.v2.scheduling.reference.AgendizeSchedulingObjectHelper;
@@ -33,7 +32,7 @@ public class AppointmentsManager extends AgendizeApiManager{
 	static final Logger logger = LogManager.getLogger(AppointmentsManager.class);
 
 	/**
-	 * @param apiKey API Key. No API Key? <a target="_blank" href="http://www.agendize.com/account#app" >Get one here</a>
+	 * @param apiKey API Key. No API Key? <a target="_blank" href="http://app.agendize.com/account#app" >Get one here</a>
 	 * @param token SSO token. See <a target="_blank" href="http://developers.agendize.com/en/p/authentication" >http://developers.agendize.com/en/p/authentication</a>
 	 * @throws IOException in case the API key or SSO token are not valid
 	 */
@@ -278,7 +277,7 @@ public class AppointmentsManager extends AgendizeApiManager{
 	 * @param endDate End date. format: yyyy-MM-dd
 	 * @param resourceId Resource identifier
 	 * @param resourceCount Number of resources to book (optional).
-	 * @return
+	 * @return the free slots for a company in resource mode
 	 * @throws JSONException
 	 * @throws ParseException
 	 */

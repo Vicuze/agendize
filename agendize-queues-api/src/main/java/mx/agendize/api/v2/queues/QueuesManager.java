@@ -15,6 +15,11 @@ import org.apache.logging.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * Class for queues management.
+ * @author <a href="mailto:victor@agendize.com">victor@agendize.com</a>
+ *
+ */
 public class QueuesManager extends AgendizeApiManager {
 	
 	static final Logger logger = LogManager.getLogger(QueuesManager.class);

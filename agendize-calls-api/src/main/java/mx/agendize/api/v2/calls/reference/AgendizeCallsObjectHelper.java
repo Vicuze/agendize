@@ -12,6 +12,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * Class for management of Agendize Calls API objects: Calls, Click to Call Buttons.
+ * Contains method to convert JSONObject and JSONArray to object and vice versa.
+ * Info about the JSON structure here <a target="_blank" href="http://developers.agendize.com/v2/calls/reference">http://developers.agendize.com/v2/calls/reference</a>
+ * @author <a href="mailto:victor@agendize.com">victor@agendize.com</a>
+ *
+ */
 public class AgendizeCallsObjectHelper {
 
 	private static final String COUNTRIES = "countries";
@@ -30,7 +37,7 @@ public class AgendizeCallsObjectHelper {
 
 	/**
 	 * Converts a JSONArray in a list of Call objects
-	 * @param callsJson json representing the list of calls. See <a target="_blank" href="http://developers.agendize.com/v2/calls/reference/index.jsp">http://developers.agendize.com/v2/calls/reference/index.jsp</a>
+	 * @param callsJson json representing the list of calls. See <a target="_blank" href="http://developers.agendize.com/v2/calls/reference">http://developers.agendize.com/v2/calls/reference</a>
 	 * @return The list of call objects.
 	 * @throws AgendizeException 
 	 * @throws JSONException 
@@ -43,6 +50,13 @@ public class AgendizeCallsObjectHelper {
     	return result;
 	}
 
+	/**
+	 * Converts a JSONObject from the API into a Call object. 
+	 * @param callJson json representing the Call. See <a target="_blank" href="http://developers.agendize.com/v2/calls/reference/">http://developers.agendize.com/v2/calls/reference/</a>
+	 * @return the Call object
+	 * @throws JSONException
+	 * @throws AgendizeException
+	 */
 	public static Call jsonObjectToCall(JSONObject callJson) throws JSONException, AgendizeException {
 		Call result = new Call();
 		result.setId(callJson.getInt(ID));
@@ -81,7 +95,7 @@ public class AgendizeCallsObjectHelper {
 	/**
 	 * Converts a Call object into a JSONObject for API use.
 	 * @param call the Call object.
-	 * @return The JSONObject representing the call. See <a target="_blank" href="http://developers.agendize.com/v2/calls/reference/index.jsp">http://developers.agendize.com/v2/calls/reference/index.jsp</a>
+	 * @return The JSONObject representing the call. See <a target="_blank" href="http://developers.agendize.com/v2/calls/reference">http://developers.agendize.com/v2/calls/reference</a>
 	 * @throws JSONException
 	 */
 	public static JSONObject callToJSONObject(Call call) throws JSONException {
@@ -115,6 +129,11 @@ public class AgendizeCallsObjectHelper {
 		return result;
 	}
 
+	/**
+	 * Converts a JSONArray to a list of ClickToCallButton objects
+	 * @param clickToCallButtonsJson json representing the click to call buttons
+	 * @return the list of ClickToCallButton objects
+	 */
 	public static List<ClickToCallButton> jsonArrayToClickToCallButtonList(JSONArray clickToCallButtonsJson) {
 		List<ClickToCallButton> result = new ArrayList<ClickToCallButton>();
 		for(int j= 0; j<clickToCallButtonsJson.length(); j++){
@@ -123,6 +142,11 @@ public class AgendizeCallsObjectHelper {
     	return result;
 	}
 
+	/**
+	 * 
+	 * @param clickToCallButtonJson
+	 * @return
+	 */
 	public static ClickToCallButton jsonObjectToClickToCallButton(JSONObject clickToCallButtonJson) {
 		ClickToCallButton result = new ClickToCallButton();
 		if(clickToCallButtonJson.has(ID)){
@@ -135,19 +159,16 @@ public class AgendizeCallsObjectHelper {
 			result.setPhoneNumber(clickToCallButtonJson.getString(PHONE_NUMBER));
 		}
 		if(clickToCallButtonJson.has(COUNTRIES)){
-			result.setCountries(jsonArrayToStringList(clickToCallButtonJson.getJSONArray(COUNTRIES)));
+			result.setCountries(AgendizeObjectHelper.jsonArrayToStringList(clickToCallButtonJson.getJSONArray(COUNTRIES)));
 		}
 		return result; 
 	}
 
-	private static List<String> jsonArrayToStringList(JSONArray jsonArray) {
-		List<String> result = new ArrayList<String>();
-		for(int i = 0; i<jsonArray.length(); i++){
-			result.add(jsonArray.getString(i));
-		}
-		return result; 
-	}
-
+	/**
+	 * Converts a JSONObject from the API into a ClickToCallButton object. 
+	 * @param clickToCallButton json representing the click to call button. See <a target="_blank" href="http://developers.agendize.com/v2/calls/reference/buttons">http://developers.agendize.com/v2/calls/reference/buttons</a>
+	 * @return
+	 */
 	public static JSONObject clickToCallButtonToJSONObject(ClickToCallButton clickToCallButton) {
 		JSONObject result = new JSONObject(); 
 		if(clickToCallButton.getId() != null){
@@ -160,15 +181,7 @@ public class AgendizeCallsObjectHelper {
 			result.put(PHONE_NUMBER, clickToCallButton.getPhoneNumber()); 
 		}
 		if(clickToCallButton.getCountries() != null && !clickToCallButton.getCountries().isEmpty()){
-			result.put(COUNTRIES, stringListToJSONArray(clickToCallButton.getCountries())); 
-		}
-		return result;
-	}
-
-	private static JSONArray stringListToJSONArray(List<String> strings) {
-		JSONArray result = new JSONArray();
-		for(String s: strings){
-			result.put(s);
+			result.put(COUNTRIES, AgendizeObjectHelper.stringListToJSONArray(clickToCallButton.getCountries())); 
 		}
 		return result;
 	}

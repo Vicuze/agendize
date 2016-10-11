@@ -1,6 +1,6 @@
 package mx.agendize.api.v2.queues.reference;
 
-import mx.agendize.api.data.objects.FormDetails;
+import mx.agendize.api.v2.forms.reference.Form;
 import mx.agendize.api.v2.reference.AgendizeObject;
 import mx.agendize.api.v2.scheduling.reference.Company;
 
@@ -11,7 +11,7 @@ public class Queue extends AgendizeObject {
 	private String thankMessage; 
 	private String welcomeMessage;
 	private Company company;
-	private FormDetails form;
+	private Form form;
 	
 	/**
 	 * @return the author
@@ -76,15 +76,16 @@ public class Queue extends AgendizeObject {
 	/**
 	 * @return the form
 	 */
-	public final FormDetails getForm() {
+	public final Form getForm() {
 		return form;
 	}
 	/**
 	 * @param form the form to set
 	 */
-	public final void setForm(FormDetails form) {
+	public final void setForm(Form form) {
 		this.form = form;
 	}
+	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */

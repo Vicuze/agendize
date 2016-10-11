@@ -70,7 +70,7 @@ public class APIUtils {
 		URL url = new URL(urlString);//TODO utiliser autre constructeur pour gérer les caracteres bizarres
 		logger.debug("GET Request: "+url.toString());
 		HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-        return urlConnection.getInputStream();
+		return urlConnection.getInputStream();
 	}
 	
 	/**

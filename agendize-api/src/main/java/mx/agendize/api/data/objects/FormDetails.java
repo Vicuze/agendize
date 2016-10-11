@@ -11,7 +11,7 @@ import org.w3c.dom.NodeList;
  * Class representing the details of an Agendize form.
  * 
  * @author <a href="mailto:victor@agendize.com">victor@agendize.com</a>
- * 
+ * @deprecated please use the v2.
  */
 public class FormDetails extends ButtonDetails {
 

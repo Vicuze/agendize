@@ -1,9 +1,13 @@
 package mx.agendize.api.v2.resellers.reference;
 
 import java.util.Currency;
+import java.util.EnumSet;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import mx.agendize.api.v2.reference.AgendizeObject;
+import mx.agendize.api.v2.reference.AccountPreferences;
 import mx.agendize.api.v2.reference.Time;
 
 /**
@@ -12,6 +16,50 @@ import mx.agendize.api.v2.reference.Time;
  *
  */
 public class Account extends AgendizeObject {
+
+	/**
+	 * List of tools. save,scheduling,chat,call,calltracking,form
+	 */
+	public enum Tool{
+		SAVE_SHARE("save"),
+		SCHEDULING("scheduling"),
+		CHAT("chat"),
+		CLICK_TO_CALL("call"),
+		CALLTRACKING("calltracking"),
+		FORM("form");
+		
+		private String code;
+
+		/**
+		 * @param code
+		 */
+		private Tool(String code) {
+			this.code = code;
+		}
+
+		/**
+		 * @return the code
+		 */
+		public String getCode() {
+			return code;
+		}
+
+		private static final Map<String, Tool> lookup = new HashMap<String, Tool>();
+	    
+	    static {
+	        for (Tool t : EnumSet.allOf(Tool.class))
+	            lookup.put(t.getCode(), t);
+	    }
+	 
+	    /**
+	     * Get a Tool by its code.
+	     * @param s code. ex: "call".
+	     * @return The Tool.
+	     */
+	    public static Tool get(String s) {
+	        return lookup.get(s);
+	    }
+	}
 
 	/** User name of the user account. His email address. */
 	private String clientName;
@@ -28,7 +76,7 @@ public class Account extends AgendizeObject {
 	/** Internal reseller client identifier. Have to be unique for each client account. */
 	private String resellerId;
 	/** Profile settings of the user account. */
-	private Preferences preferences;
+	private AccountPreferences preferences;
 	/** Account credits. Read only */
 	private Integer credit;
 	/** The name of the organization of the user account. */
@@ -40,7 +88,7 @@ public class Account extends AgendizeObject {
 	/** The account profile type of the user account. */ 
 	private Profile profile;
 	/** List of tools available for the user account. Values: save,scheduling,chat,call,calltracking,form. */
-	private List<String> tools;
+	private List<Tool> tools;
 	/** White label settings of the user account. */
 	private WhiteLabelSettings whiteLabel; 
 
@@ -63,8 +111,8 @@ public class Account extends AgendizeObject {
 	 * @param tools List of tools availables for the user account. Values: save,scheduling,chat,call,calltracking,form.
 	 * @param whiteLabel White label settings of the user account.
 	 */
-	public Account(String clientName, String firstName, String lastName, String email, String password, Currency currency, String resellerId, Preferences preferences,
-			Integer credit, String organization, Profile profile, List<String> tools, WhiteLabelSettings whiteLabel) {
+	public Account(String clientName, String firstName, String lastName, String email, String password, Currency currency, String resellerId, AccountPreferences preferences,
+			Integer credit, String organization, Profile profile, List<Tool> tools, WhiteLabelSettings whiteLabel) {
 		super();
 		this.clientName = clientName;
 		this.firstName = firstName;
@@ -83,12 +131,12 @@ public class Account extends AgendizeObject {
 
 	/**
 	 * Returns true if the call tracking is activated for this account.
-	 * @return
+	 * @return true if the call tracking is activated for this account.
 	 */
 	public boolean hasCallTracking(){
 		if (tools != null && !tools.isEmpty()){
-			for(String tool: tools){
-				if(tool.equals("calltracking")){
+			for(Tool tool: tools){
+				if(tool.equals(Tool.CALLTRACKING)){
 					return true; 
 				}
 			}
@@ -147,13 +195,13 @@ public class Account extends AgendizeObject {
 	/**
 	 * @return the preferences
 	 */
-	public final Preferences getPreferences() {
+	public final AccountPreferences getPreferences() {
 		return preferences;
 	}
 	/**
 	 * @param preferences the preferences to set
 	 */
-	public final void setPreferences(Preferences preferences) {
+	public final void setPreferences(AccountPreferences preferences) {
 		this.preferences = preferences;
 	}
 	/**
@@ -243,13 +291,13 @@ public class Account extends AgendizeObject {
 	/**
 	 * @return the tools
 	 */
-	public final List<String> getTools() {
+	public final List<Tool> getTools() {
 		return tools;
 	}
 	/**
 	 * @param tools the tools to set
 	 */
-	public final void setTools(List<String> tools) {
+	public final void setTools(List<Tool> tools) {
 		this.tools = tools;
 	}
 	/**

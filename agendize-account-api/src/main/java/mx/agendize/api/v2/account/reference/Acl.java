@@ -1,4 +1,4 @@
-package mx.agendize.api.v2.platform.reference;
+package mx.agendize.api.v2.account.reference;
 
 public class Acl {
 	private String role; 

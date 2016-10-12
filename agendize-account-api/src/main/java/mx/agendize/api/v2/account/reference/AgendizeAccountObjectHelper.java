@@ -1,4 +1,4 @@
-package mx.agendize.api.v2.platform.reference;
+package mx.agendize.api.v2.account.reference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,13 +9,13 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
- * Class for management of Agendize platform API objects: .
+ * Class for management of Agendize account API objects: .
  * Contains method to convert JSONObject and JSONArray to object and vice versa.
  * Info about the JSON structure here <a target="_blank" href="http://developers.agendize.com/v2/scheduling/reference/index.jsp">http://developers.agendize.com/v2/scheduling/reference/index.jsp</a>
  * @author <a href="mailto:victor@agendize.com">victor@agendize.com</a>
  *
  */
-public class AgendizePlatformObjectHelper {
+public class AgendizeAccountObjectHelper {
 
 	/** parameter names */
 	private static final String USER_NAME = "userName";
@@ -37,7 +37,7 @@ public class AgendizePlatformObjectHelper {
 	
 	/**
 	 * Converts a JSONObject from the API into an Account object
-	 * @param accountJson json representing the account. See <a target="_blank" href="http://developers.agendize.com/v2/platform/reference/accounts/index.jsp">http://developers.agendize.com/v2/platform/reference/accounts/index.jsp</a>
+	 * @param accountJson json representing the account. See <a target="_blank" href="http://developers.agendize.com/v2/platform/reference/accounts">http://developers.agendize.com/v2/platform/reference/accounts</a>
 	 * @return The account object.
 	 */
 	public static Account jsonObjectToAccount(JSONObject accountJson) {

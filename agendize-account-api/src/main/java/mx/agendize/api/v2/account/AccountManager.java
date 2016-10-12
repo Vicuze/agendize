@@ -1,12 +1,12 @@
-package mx.agendize.api.v2.platform;
+package mx.agendize.api.v2.account;
 
 import java.io.IOException;
 import java.util.Properties;
 
 import mx.agendize.api.APIUtils;
 import mx.agendize.api.AgendizeApiManager;
-import mx.agendize.api.v2.platform.reference.Account;
-import mx.agendize.api.v2.platform.reference.AgendizePlatformObjectHelper;
+import mx.agendize.api.v2.account.reference.Account;
+import mx.agendize.api.v2.account.reference.AgendizeAccountObjectHelper;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -42,7 +42,7 @@ public class AccountManager extends AgendizeApiManager{
 		properties.put(TOKEN, token);
         String accountsString = APIUtils.getRequest(ACCOUNTS_API_URL, properties);
 		JSONObject jsonObject = new JSONObject(accountsString);
-		Account result = AgendizePlatformObjectHelper.jsonObjectToAccount(jsonObject);
+		Account result = AgendizeAccountObjectHelper.jsonObjectToAccount(jsonObject);
 		logger.info("Account "+ result.getUserName() +" found.");
 		return result;
 	}

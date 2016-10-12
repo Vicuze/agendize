@@ -17,6 +17,7 @@ import org.json.JSONObject;
  */
 public class AgendizePlatformObjectHelper {
 
+	/** parameter names */
 	private static final String USER_NAME = "userName";
 	private static final String TARGET = "target";
 	private static final String ROLE = "role";
@@ -29,7 +30,6 @@ public class AgendizePlatformObjectHelper {
 	private static final String RIGHTS = "rights";
 	private static final String PREFERENCES = "preferences";
 	private static final String SSO_TOKEN = "ssoToken";
-	/** parameter names */
 	private static final String EMAIL = "email";
 	private static final String LAST_NAME = "lastName";
 	private static final String FIRST_NAME = "firstName";
